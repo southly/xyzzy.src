@@ -1,3 +1,8 @@
+2009-12-10  NANRI Masaoki  <southly@gmail.com>
+
+	* src : fix format "~n@A".
+	http://d.hatena.ne.jp/bowbow99/20090829/1251547986
+
 2009-12-09  NANRI Masaoki  <southly@gmail.com>
 
 	* src : add "*brackets-is-wildcard-character*" to history-variable.
