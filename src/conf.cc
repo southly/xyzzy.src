@@ -498,7 +498,8 @@ reg2ini_colors ()
   cf.type = CONF_HEX;
   char name[16];
   cf.name = name;
-  for (int i = 1; i <= 16; i++)
+  int i;
+  for (i = 1; i <= 16; i++)
     {
       sprintf (name, "%s%d", cfgFg, i);
       reg2ini_int (cfgColors, r, cf);

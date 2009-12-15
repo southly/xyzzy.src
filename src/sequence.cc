@@ -525,7 +525,8 @@ Freplace (lisp seq1, lisp seq2, lisp keys)
                 seq2 = Fnthcdr (make_fixnum (start2), seq2);
                 safe_ptr <char> sp (new char [sizeof (lisp) * l]);
                 lisp *x = (lisp *)(char *)sp;
-                for (int i = 0; i < l; i++, seq2 = xcdr (seq2))
+                int i;
+                for (i = 0; i < l; i++, seq2 = xcdr (seq2))
                   {
                     assert (consp (seq2));
                     x[i] = xcar (seq2);
@@ -640,7 +641,8 @@ Freplace (lisp seq1, lisp seq2, lisp keys)
             l = min (end1 - start1, end2 - start2);
             end2 = start2 + l;
             seq2 = Fnthcdr (make_fixnum (start2), seq2);
-            for (lisp p = seq2; start2 < end2; start2++, p = xcdr (p))
+            lisp p;
+            for (p = seq2; start2 < end2; start2++, p = xcdr (p))
               {
                 assert (consp (p));
                 check_char (xcar (p));
@@ -658,7 +660,8 @@ Freplace (lisp seq1, lisp seq2, lisp keys)
             l = min (end1 - start1, end2 - start2);
             lisp *v0 = xvector_contents (seq2) + start2;
             lisp *ve = v0 + l;
-            for (lisp *v = v0; v < ve; v++)
+            lisp *v;
+            for (v = v0; v < ve; v++)
               check_char (*v);
             Char *s = xstring_contents (seq1) + start1;
             for (v = v0; v < ve; v++, s++)
@@ -711,7 +714,8 @@ xdelete (test_proc &test, T *p, int start, int end, lisp from_end, int count, in
     return l;
   if (from_end == Qnil || count >= end - start)
     {
-      for (int i = start, j = start; i < end; i++)
+      int i, j;
+      for (i = start, j = start; i < end; i++)
         if (!test.test (coerce_to_lisp_object (p[i])))
           p[j++] = p[i];
         else if (!--count)
@@ -727,7 +731,8 @@ xdelete (test_proc &test, T *p, int start, int end, lisp from_end, int count, in
     }
   else
     {
-      for (int i = end - 1, j = end; i >= start; i--)
+      int i, j;
+      for (i = end - 1, j = end; i >= start; i--)
         if (!test.test (coerce_to_lisp_object (p[i])))
           p[--j] = p[i];
         else if (!--count)
@@ -765,7 +770,8 @@ xdelete (lisp seq, test_proc &test, lisp keys)
             safe_ptr <char> sp (new char [sizeof (lisp) * l]);
             lisp *v = (lisp *)(char *)sp;
             lisp p = seq;
-            for (int i = 0; i < l; i++, p = xcdr (p))
+            int i;
+            for (i = 0; i < l; i++, p = xcdr (p))
               v[i] = xcar (p);
             int n = xdelete (test, v, start, end, from_end,
                              lcount == Qnil ? l : fixnum_value (lcount), l);

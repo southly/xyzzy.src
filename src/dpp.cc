@@ -481,7 +481,8 @@ read_optargs (argments &args)
       pe = strchr (p0, ',');
       if (!pe)
         pe = p0 + strlen (p0);
-      for (char *p = pe; p > p0 && (isalnum (p[-1]) || p[-1] == '_'); p--)
+      char *p;
+      for (p = pe; p > p0 && (isalnum (p[-1]) || p[-1] == '_'); p--)
         ;
       if (p == pe || p == p0)
         break;
@@ -529,7 +530,8 @@ process_proc ()
     error ("{ expected");
 
   int body[LMAX * LMAX];
-  for (int i = 0; i < LMAX * LMAX; i++)
+  int i;
+  for (i = 0; i < LMAX * LMAX; i++)
     body[i] = NOT_DEFINED;
 
   while (process_body (body, rettype, name, args))

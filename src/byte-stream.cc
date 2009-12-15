@@ -36,7 +36,8 @@ byte_output_wstream::sflush (u_char *b0, u_char *be, int eofp)
 {
   u_char *b = b0;
   Char wbuf[sizeof s_buf];
-  for (Char *w = wbuf; b < be;)
+  Char *w;
+  for (w = wbuf; b < be;)
     {
       if (SJISP (*b))
         {

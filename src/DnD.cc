@@ -204,7 +204,8 @@ static int
 make_idl (HWND hwnd, lisp ldir, void *param,
           int (*fn)(HWND, IShellFolder *, ITEMIDLIST **, int, int, void *))
 {
-  for (int i = -1, nfiles = 0;
+  int i, nfiles;
+  for (i = -1, nfiles = 0;
        (i = ListView_GetNextItem (hwnd, i, LVNI_SELECTED)) >= 0;
        nfiles++)
     ;

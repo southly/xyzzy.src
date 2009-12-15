@@ -141,7 +141,8 @@ Fpopup_list (lisp list, lisp callback, lisp lpoint)
   if (!consp (list))
     return Qnil;
 
-  for (lisp p = list; consp (p); p = xcdr (p))
+  lisp p;
+  for (p = list; consp (p); p = xcdr (p))
     check_string (xcar (p));
 
   if (hwnd_popup)

@@ -33,7 +33,8 @@ void
 Dialog::enable_windows (dlgctrl *c, int status)
 {
   lisp kwd = c->keyword ();
-  for (lisp grp = safe_find_keyword (Kenable, kwd); consp (grp); grp = xcdr (grp))
+  lisp grp;
+  for (grp = safe_find_keyword (Kenable, kwd); consp (grp); grp = xcdr (grp))
     {
       dlgctrl *x = get_item (xcar (grp));
       if (x)
@@ -814,7 +815,8 @@ Dialog::spin_invalidate (class dlgctrl *)
 void
 Dialog::init_items ()
 {
-  for (lisp p = d_item; consp (p); p = xcdr (p))
+  lisp p;
+  for (p = d_item; consp (p); p = xcdr (p))
     {
       dlgctrl *c = (dlgctrl *)xcar (p);
       lisp wclass = c->wclass ();
@@ -1411,7 +1413,8 @@ Dialog::create_dialog_template (lisp dialog, lisp handlers,
   if (xcar (d) != Qdialog)
     FEtype_error (xcar (d), Qdialog);
   d = xcdr (d);
-  for (int i = 0; i < 4; i++, d = xcdr (d))
+  int i;
+  for (i = 0; i < 4; i++, d = xcdr (d))
     fixnum_value (xcar (d));
 
   int size = (sizeof (DLGTEMPLATE)
@@ -1429,7 +1432,8 @@ Dialog::create_dialog_template (lisp dialog, lisp handlers,
       size += sizeof (WCHAR) * (PropSheetFont::face_len + 1) + sizeof (WORD);
     }
 
-  for (int nitems = 0; consp (d); d = xcdr (d))
+  int nitems;
+  for (nitems = 0; consp (d); d = xcdr (d))
     {
       lisp x = xcar (d);
       check_cons (x);
@@ -1910,7 +1914,8 @@ Fproperty_sheet (lisp pages, lisp caption, lisp lstart_page)
   protect_gc gcpro (pages);
 
   int total_pages = 0, lpages = 0;
-  for (lisp p = pages; consp (p); p = xcdr (p), total_pages++)
+  lisp p;
+  for (p = pages; consp (p); p = xcdr (p), total_pages++)
     {
       QUIT;
       lisp x = xcar (p);

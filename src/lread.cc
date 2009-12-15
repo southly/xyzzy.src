@@ -582,7 +582,8 @@ read_delimited_list (lisp stream, Char delim, int &len)
 static int
 read_escape_sequence (lisp stream, int val, int base, int nchars)
 {
-  for (int i = 0; i < nchars; i++)
+  int i;
+  for (i = 0; i < nchars; i++)
     {
       lChar c = readc_stream (stream);
       if (c == lChar_EOF)
@@ -1148,7 +1149,8 @@ number_A_reader (lisp stream, Char, dispmacro_param &param)
     reader_error (stream, Earray_rank_too_large);
 
   int *dims = (int *)alloca (sizeof (int) * rank);
-  for (int i = 0; i < rank; i++)
+  int i;
+  for (i = 0; i < rank; i++)
     dims[i] = -1;
 
   count_dimensions (stream, object, dims, rank - 1);
@@ -1502,7 +1504,8 @@ get_reader_macro_function (lisp fn)
 static void
 default_readtable (readtab_rep *const r)
 {
-  for (int i = 0; i < ' '; i++)
+  int i;
+  for (i = 0; i < ' '; i++)
     {
       r[i].type = SCT_ILLEGAL;
       r[i].cfunc = 0;
@@ -1572,7 +1575,8 @@ static void
 copy_readtable (const readtab_rep *oldr, readtab_rep *newr)
 {
   memcpy (newr, oldr, sizeof *newr * READTABLE_REP_SIZE);
-  for (readtab_rep *r = newr, *const e = r + READTABLE_REP_SIZE; r < e; r++)
+  readtab_rep *r = newr, *const e = r + READTABLE_REP_SIZE;
+  for (; r < e; r++)
     r->disp = 0;
   for (; newr < e; oldr++, newr++)
     if (oldr->disp)
@@ -1951,7 +1955,8 @@ Fread_into (lisp string, lisp stream, lisp eof_error_p, lisp eof_value, lisp max
       if (l <= 0 || l > xstring_dimension (string))
         FErange_error (max_length);
     }
-  for (Char *p = xstring_contents (string), *const pe = p + l; p < pe; p++)
+  Char *p = xstring_contents (string), *const pe = p + l;
+  for (; p < pe; p++)
     {
       lChar c = readc_stream (stream);
       if (c == lChar_EOF)

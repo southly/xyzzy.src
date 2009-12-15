@@ -254,7 +254,8 @@ flonum_rationalize (double x, int prec)
 {
   int dec, sign;
   const char *p = _ecvt (x, prec + 1, &dec, &sign);
-  for (const char *pe = p + strlen (p); pe > p && pe[-1] == '0'; pe--)
+  const char *pe;
+  for (pe = p + strlen (p); pe > p && pe[-1] == '0'; pe--)
     ;
   if (p == pe)
     return make_fixnum (0);

@@ -682,7 +682,8 @@ ChooseFontPage::init_page (PropSheet *sheet, int page_no, PROPSHEETPAGE *psp)
 {
   ChangeColorsPageP::init_page (IDD_FONT, sheet, page_no, psp);
 
-  for (int i = 0; i < FONT_MAX; i++)
+  int i;
+  for (i = 0; i < FONT_MAX; i++)
     GetObject (app.text_font.font (i), sizeof cfp_param.fs_logfont[i],
                &cfp_param.fs_logfont[i]);
   cfp_param.fs_line_spacing = app.text_font.line_spacing ();

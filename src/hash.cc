@@ -516,7 +516,8 @@ equalp (lhash_table *x, lhash_table *y)
 
   int size = xhash_table_size (x);
   hash_entry *entry = xhash_table_entry (x);
-  for (int i = 0; i < size; i++, entry++)
+  int i;
+  for (i = 0; i < size; i++, entry++)
     if (entry->key != Qunbound && entry->key != Qdeleted)
       if (!find_hash_entry (entry->key, y))
         return 0;

@@ -307,7 +307,8 @@ print_circle::setup (lisp object)
   int number = 1;
   for (circle_rep *rep = currep; rep; rep = rep->next)
     {
-      for (circle_object *p = rep->objs, *pe = p + rep->used, *q = p;
+      circle_object *p, *pe, *q;
+      for (p = rep->objs, pe = p + rep->used, q = p;
            p < pe; p++)
         if (p->f == circle_object::shared)
           {
@@ -531,7 +532,8 @@ symbol_name_need_escape_p (lisp readtab, const print_control &pc, lisp object)
     return 1;
 
   u_char ctype = 0;
-  for (const Char *p = p0; p < pe; p++)
+  const Char *p;
+  for (p = p0; p < pe; p++)
     {
       switch (stdchar_type (xreadtable_rep (readtab), *p))
         {
@@ -793,7 +795,8 @@ print_flonum (wStream &stream, const print_control &, lisp lnumber)
           else
             {
               char *b = f.b0;
-              for (int i = -1; i < f.exp && *b; i++, b++)
+              int i;
+              for (i = -1; i < f.exp && *b; i++, b++)
                 stream.add (*b);
               stream.fill ('0', f.exp - i);
               stream.add ('.');
@@ -1094,7 +1097,8 @@ print_omitted_array (wStream &stream, const print_control &pc,
 
   for (int i = 0; i < total_size; i++)
     {
-      for (int j = rank - 1; j >= 0; j--)
+      int j;
+      for (j = rank - 1; j >= 0; j--)
         if (!subscripts[j])
           stream.add ('(');
         else
@@ -1156,7 +1160,8 @@ print_array (wStream &stream, const print_control &pc,
 
   for (int i = 0; i < xarray_total_size (object); i++)
     {
-      for (int j = xarray_rank (object) - 1; j >= 0; j--)
+      int j;
+      for (j = xarray_rank (object) - 1; j >= 0; j--)
         if (!subscripts[j])
           stream.add ('(');
         else
@@ -1901,7 +1906,8 @@ void
 Format::setarg (lisp *v, lisp l)
 {
   args = v;
-  for (int i = 0; consp (l); l = xcdr (l), i++)
+  int i;
+  for (i = 0; consp (l); l = xcdr (l), i++)
     *v++ = xcar (l);
   nargs = i;
 }
@@ -2474,7 +2480,8 @@ Format::fixed_format (wStream &stream)
   else
     {
       char *b = f.b0;
-      for (int i = -1; i < f.exp && *b; i++, b++)
+      int i;
+      for (i = -1; i < f.exp && *b; i++, b++)
         stream.add (*b);
       stream.fill ('0', f.exp - i);
       stream.add ('.');
@@ -2487,7 +2494,8 @@ Format::fixed_format (wStream &stream)
 static int
 exp_width (int exp)
 {
-  for (int n = 0; exp; n++, exp /= 10)
+  int n;
+  for (n = 0; exp; n++, exp /= 10)
     ;
   return n ? n : 1;
 }
@@ -2572,7 +2580,8 @@ Format::exp_format (wStream &stream)
       stream.add ('.');
       f.round (d);
       char *b = f.b0;
-      for (int i = d; i > 0 && *b; i--, b++)
+      int i;
+      for (i = d; i > 0 && *b; i--, b++)
         stream.add (*b);
       stream.fill ('0', i);
     }
@@ -2580,7 +2589,8 @@ Format::exp_format (wStream &stream)
     {
       f.round (d + 1);
       char *b = f.b0;
-      for (int i = k; i > 0 && *b; i--, b++)
+      int i;
+      for (i = k; i > 0 && *b; i--, b++)
         stream.add (*b);
       stream.fill ('0', i);
       stream.add ('.');
@@ -2596,7 +2606,8 @@ Format::exp_format (wStream &stream)
       stream.add ('.');
       stream.fill ('0', -k);
       char *b = f.b0;
-      for (int i = d + k; i > 0 && *b; i--, b++)
+      int i;
+      for (i = d + k; i > 0 && *b; i--, b++)
         stream.add (*b);
       stream.fill ('0', i);
     }
@@ -2751,12 +2762,14 @@ Format::dollar_format (wStream &stream)
   else
     {
       stream.fill ('0', n - f.exp - 1);
-      for (int i = -1; i < f.exp && *b; i++, b++)
+      int i;
+      for (i = -1; i < f.exp && *b; i++, b++)
         stream.add (*b);
       stream.fill ('0', f.exp - i);
     }
   stream.add ('.');
-  for (int i = 0; i < d && *b; i++, b++)
+  int i;
+  for (i = 0; i < d && *b; i++, b++)
     stream.add (*b);
   stream.fill ('0', d - i);
 }
@@ -3007,7 +3020,8 @@ Format::case_conversion (wStream &stream)
 {
   max_param (0);
   const Char *next = skip_ctl_string (ctl, ctle, ')', '(');
-  for (const Char *p = ctl, *pe = next - 1; *pe != '~'; pe--)
+  const Char *p, *pe;
+  for (p = ctl, pe = next - 1; *pe != '~'; pe--)
     ;
 
   ctl = next;
@@ -3119,7 +3133,8 @@ Format::iteration (wStream &stream)
 {
   max_param (1);
   const Char *next = skip_ctl_string (ctl, ctle, '}', '{');
-  for (const Char *p = ctl, *pe = next - 1; *pe != '~'; pe--)
+  const Char *p, *pe;
+  for (p = ctl, pe = next - 1; *pe != '~'; pe--)
     ;
   int once_at_least = pe[1] == ':';
   if (p == pe)
@@ -3800,7 +3815,8 @@ msgbox_captions (lisp *lcaptions, lisp args)
 static int
 count_crlf (const Char *p, const Char *pe)
 {
-  for (int l = 0; p < pe; p++)
+  int l;
+  for (l = 0; p < pe; p++)
     l += *p == '\n' ? 2 : 1;
   return l;
 }
@@ -4059,7 +4075,8 @@ print_stack_trace (lisp lstream, lisp cc)
   wStreamsStream stream (lstream);
 
   int depth = 0;
-  for (stack_trace *p = stack_trace::stp; p; p = p->last)
+  stack_trace *p;
+  for (p = stack_trace::stp; p; p = p->last)
     if (p->type != stack_trace::empty)
       depth++;
 

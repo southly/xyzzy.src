@@ -24,7 +24,8 @@ ctype ()
 {
   char buf[256];
   bzero (buf, sizeof buf);
-  for (int i = '0'; i <= '9'; i++)
+  int i;
+  for (i = '0'; i <= '9'; i++)
     buf[i] |= _CTN;
   for (i = 'A'; i <= 'Z'; i++)
     buf[i] |= _CTU;
@@ -52,7 +53,8 @@ static void
 translate ()
 {
   char buf[256];
-  for (int i = 0; i < 256; i++)
+  int i;
+  for (i = 0; i < 256; i++)
     buf[i] = i;
   for (i = 'a'; i <= 'z'; i++)
     buf[i] = i - 'a' + 'A';
@@ -85,7 +87,8 @@ static void
 numeric ()
 {
   char buf[128];
-  for (int i = 0; i < 128; i++)
+  int i;
+  for (i = 0; i < 128; i++)
     buf[i] = 36;
   for (i = '0'; i <= '9'; i++)
     buf[i] = i - '0';
@@ -163,7 +166,8 @@ b64tab ()
   char buf[128];
   memset (buf, 65, sizeof buf);
 
-  for (int i = 'A'; i <= 'Z'; i++)
+  int i;
+  for (i = 'A'; i <= 'Z'; i++)
     buf[i] = i - 'A';
   for (i = 'a'; i <= 'z'; i++)
     buf[i] = i - 'a' + 26;
@@ -194,13 +198,15 @@ utf7tab ()
   char buf[128];
   memset (buf, 0, sizeof buf);
 
-  for (int i = 'A'; i <= 'Z'; i++)
+  int i;
+  for (i = 'A'; i <= 'Z'; i++)
     buf[i] = UTF7_SET_D | UTF7_SET_B;
   for (i = 'a'; i <= 'z'; i++)
     buf[i] = UTF7_SET_D | UTF7_SET_B;
   for (i = '0'; i <= '9'; i++)
     buf[i] = UTF7_SET_D | UTF7_SET_B;
-  for (const char *p = "'(),-./:?"; *p; p++)
+  const char *p;
+  for (p = "'(),-./:?"; *p; p++)
     buf[*p] = UTF7_SET_D;
 
   for (p = "!\"#$%&*;<=>@[]^_`{|}"; *p; p++)

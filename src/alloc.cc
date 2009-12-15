@@ -19,7 +19,8 @@ u_int alloc_page::ap_block_size;
 static int
 power_of_2_p (u_int size)
 {
-  for (int n = 0; size; size >>= 1)
+  int n;
+  for (n = 0; size; size >>= 1)
     if (size & 1)
       n++;
   return n == 1;
@@ -128,7 +129,8 @@ alloc_page::free (void *p)
       base &= mask;
 
       alloc_page_rep *prev = 0;
-      for (alloc_page_rep *r = ap_rep; r; prev = r, r = r->next)
+      alloc_page_rep *r;
+      for (r = ap_rep; r; prev = r, r = r->next)
         if ((pointer_t (r) & mask) == base)
           {
             u_long d = (pointer_t (p) - base) / ap_unit_size;
@@ -216,7 +218,8 @@ fixed_heap::free (void *p)
   base &= mask;
 
   u_int count = 1;
-  for (fixed_heap_rep *h = fh_heap; h; h = h->next)
+  fixed_heap_rep *h;
+  for (h = fh_heap; h; h = h->next)
     if ((pointer_t (h) & mask) == base)
       count++;
   assert (count <= fh_heap_per_page);

@@ -86,7 +86,8 @@ Fsi_www_url_encode (lisp input, lisp output, lisp literal_chars)
   bzero (lc, sizeof lc);
   if (!literal_chars || literal_chars == Qnil)
     {
-      for (int i = '0'; i <= '9'; i++)
+      int i;
+      for (i = '0'; i <= '9'; i++)
         lc[i] = 1;
       for (i = 'A'; i <= 'Z'; i++)
         lc[i] = lc[i + ('a' - 'A')] = 1;

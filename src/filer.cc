@@ -289,7 +289,8 @@ FilerView::add_list_view (const char *last)
   ListView_DeleteAllItems (fv_hwnd);
 
   int nfiles = 0;
-  for (find_chunk *fc = fv_chunk; fc; fc = fc->fc_cdr)
+  find_chunk *fc;
+  for (fc = fv_chunk; fc; fc = fc->fc_cdr)
     nfiles += fc->fc_used;
 
   ListView_SetItemCount (fv_hwnd, nfiles);
@@ -557,9 +558,11 @@ compare_filename (const char *s1, const char *s2, int param)
       u_char c1 = *p1++, c2 = *p2++;
       if (digit_char_p (c1) && digit_char_p (c2))
         {
-          for (const u_char *const b1 = p1 - 1; digit_char_p (*p1); p1++)
+          const u_char *const b1 = p1 - 1;
+          for (; digit_char_p (*p1); p1++)
             ;
-          for (const u_char *const b2 = p2 - 1; digit_char_p (*p2); p2++)
+          const u_char *const b2 = p2 - 1;
+          for (; digit_char_p (*p2); p2++)
             ;
           int l1 = p1 - b1, l2 = p2 - b2;
           if (l1 != l2)
@@ -854,11 +857,13 @@ void
 FilerView::disk_space (double nbytes, char *buf, int c)
 {
   const char *const u[] = {"B", "KB", "MB", "GB", "TB"};
-  for (int i = 0; i < numberof (u) - 1 && c != *u[i] && nbytes >= 1024.0;
+  int i;
+  for (i = 0; i < numberof (u) - 1 && c != *u[i] && nbytes >= 1024.0;
        i++, nbytes /= 1024.0)
     ;
   sprintf (buf, "%.2f", nbytes);
-  for (char *b = buf + strlen (buf); b > buf && b[-1] == '0'; b--)
+  char *b;
+  for (b = buf + strlen (buf); b > buf && b[-1] == '0'; b--)
     ;
   if (b > buf && b[-1] == '.')
     b--;

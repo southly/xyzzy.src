@@ -111,7 +111,8 @@ create_sexp (xyzzysrv &sv, int ac, char **av)
   char curdir[MAX_PATH + 1];
   GetCurrentDirectory (sizeof curdir, curdir);
   int l = 256 + lstrlen (curdir) * 2;
-  for (int i = 0; i < ac; i++)
+  int i;
+  for (i = 0; i < ac; i++)
     l += lstrlen (av[i]) * 2 + 3;
 
   if (!sv.alloc (l))
@@ -183,7 +184,8 @@ find_server (lookup_server &ls)
 static int
 run_xyzzy (int argc, char **argv, const char *xyzzy)
 {
-  for (int l = lstrlen (xyzzy) + 1, i = 1;
+  int l, i;
+  for (l = lstrlen (xyzzy) + 1, i = 1;
        i < argc; l += lstrlen (argv[i]) + 1, i++)
     ;
   char *const cl = (char *)_alloca (l);
@@ -223,7 +225,8 @@ wait_term (xyzzysrv &sv)
 static int
 skip_args (int argc, char **argv)
 {
-  for (int ac = 1; ac < argc - 1; ac += 2)
+  int ac;
+  for (ac = 1; ac < argc - 1; ac += 2)
     if (lstrcmp (argv[ac], "-image")
         && lstrcmp (argv[ac], "-config")
         && lstrcmp (argv[ac], "-ini"))
@@ -278,7 +281,8 @@ xmain (int argc, char **argv, const char *xyzzy, int multi_instance)
           return error (IDS_CALL_PROCESS);
 
 #define RETRY_MAX 30
-        for (int i = 0; i < RETRY_MAX; i++)
+        int i;
+        for (i = 0; i < RETRY_MAX; i++)
           {
             if (find_server (ls))
               break;
@@ -332,7 +336,8 @@ parse_cmdline1 (const char *p, char *&b0, int &ac, char **&av0, int nchars)
       int dq = 0;
       while (1)
         {
-          for (int nbacksl = 0; *p == '\\'; nbacksl++, p++)
+          int nbacksl;
+          for (nbacksl = 0; *p == '\\'; nbacksl++, p++)
             ;
 
           int ignore = 0;

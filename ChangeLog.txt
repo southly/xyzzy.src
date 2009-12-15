@@ -1,3 +1,9 @@
+2009-12-16  NANRI Masaoki  <southly@gmail.com>
+
+	* src : remove compiler option '-Zc:forScope-'.
+	forループのスコープをC++の標準にしてもコンパイル可能なように修正。
+	必要な箇所だけ変数宣言をforループの前に出すのを基本方針にしている。
+
 2009-12-10  NANRI Masaoki  <southly@gmail.com>
 
 	* src : fix format "~n@A".

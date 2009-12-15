@@ -23,7 +23,8 @@ file_masks::build_masks (lisp lmasks)
 {
   int nfiles = 0;
   int nbytes = 0;
-  for (lisp p = lmasks; consp (p); p = xcdr (p))
+  lisp p;
+  for (p = lmasks; consp (p); p = xcdr (p))
     {
       lisp x = xcar (p);
       check_string (x);
@@ -62,7 +63,8 @@ file_masks::set_text (HWND hwnd) const
   else
     {
       int nbytes = 16;
-      for (char **p = fm_masks; *p; p++)
+      char **p;
+      for (p = fm_masks; *p; p++)
         nbytes += strlen (*p) + 1;
 
       char *b0 = (char *)alloca (nbytes);

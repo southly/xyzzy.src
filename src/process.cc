@@ -63,7 +63,8 @@ void
 EnvStrings::setup (lisp lenv)
 {
   int n = 0, l = 0;
-  for (lisp le = lenv; consp (le); le = xcdr (le), n++)
+  lisp le;
+  for (le = lenv; consp (le); le = xcdr (le), n++)
     {
       lisp x = xcar (le);
       check_cons (x);
@@ -76,7 +77,8 @@ EnvStrings::setup (lisp lenv)
         }
     }
 
-  for (int d = 0; d < 26; d++)
+  int d;
+  for (d = 0; d < 26; d++)
     {
       const char *dir = get_device_dir (d);
       int x = strlen (dir);
@@ -87,7 +89,8 @@ EnvStrings::setup (lisp lenv)
         }
     }
 
-  for (char **e = environ; *e; e++, n++)
+  char **e;
+  for (e = environ; *e; e++, n++)
     ;
 
   l = (l + sizeof (char **) - 1) / sizeof (char **) * sizeof (char **);
@@ -119,7 +122,8 @@ EnvStrings::setup (lisp lenv)
   qsort (nb, ne - nb, sizeof *nb, compare);
 
   l = 1;
-  for (char **np = nb; np < ne; np++)
+  char **np;
+  for (np = nb; np < ne; np++)
     if (**np)
       l += strlen (*np) + 1;
 
@@ -613,7 +617,8 @@ class process_input_stream: public byte_input_stream
             {
             case eol_crlf:
               {
-                for (u_char *d = p_buf, *s = p_buf, *const se = s + l;
+                u_char *d = p_buf, *s = p_buf, *const se = s + l;
+                for (;
                      s < se; s++)
                   if (*s != '\r')
                     *d++ = *s;

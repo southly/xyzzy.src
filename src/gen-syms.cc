@@ -2709,7 +2709,8 @@ check_dup (symbols *p, int n, const char *pkg)
     return;
 
   const char **buf = (const char **)alloca (sizeof (char *) * n);
-  for (int i = 0; i < n; i++, p++)
+  int i;
+  for (i = 0; i < n; i++, p++)
     buf[i] = p->name;
 
   qsort (buf, n, sizeof *buf, compare);
@@ -2835,7 +2836,8 @@ static void
 process_interactive ()
 {
   const char **intr = (const char **)alloca (sizeof (char *) * numberof (ed));
-  for (int i = 0, j = 0; i < numberof (ed); i++)
+  int i, j;
+  for (i = 0, j = 0; i < numberof (ed); i++)
     if (ed[i].interactive)
       intr[j++] = ed[i].interactive;
   if (!j)

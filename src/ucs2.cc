@@ -68,7 +68,8 @@ init_iso8859 (wc2int_hash &hash, wc2int_hash_rep *rep, int size, int ccs)
   hash.size = size;
   hash.rep = rep;
 
-  for (int i = 0; i < size; i++)
+  int i;
+  for (i = 0; i < size; i++)
     rep[i].wc = ucs2_t (-1);
 
   for (i = 0; i < 128; i++)
@@ -90,7 +91,8 @@ init_wincp (wc2int_hash &hash, wc2int_hash_rep *rep, int size, const Char *to_in
   hash.size = size;
   hash.rep = rep;
 
-  for (int i = 0; i < size; i++)
+  int i;
+  for (i = 0; i < size; i++)
     rep[i].wc = ucs2_t (-1);
 
   for (i = 0; i < 128; i++)
@@ -243,7 +245,8 @@ copy_diff_table (Char *const tab,
 static void
 make_wc2cp932_table ()
 {
-  for (int i = 0; i < 0x10000; i++)
+  int i;
+  for (i = 0; i < 0x10000; i++)
     wc2cp932_table[i] = Char (-1);
   for (i = 0; i < 0x100; i++)
     if (i2w (i) != Char (-1))
@@ -285,7 +288,8 @@ init_wc2perlang_table (Char *const tab, int min, int max,
                        const Char *wincr, int nwincr,
                        const Char *rest, int nrest)
 {
-  for (int i = 0; i < 0x80; i++)
+  int i;
+  for (i = 0; i < 0x80; i++)
     tab[i] = i;
   for (; i < 0x10000; i++)
     tab[i] = Char (-1);

@@ -291,7 +291,8 @@ insert_menu (lisp lmenu, int pos, lisp item, UINT flags, const char *name, UINT 
             FEsimple_win32_error (GetLastError ());
         }
       l -= pos;
-      for (lisp p = xwin32_menu_items (lmenu); --l > 0; p = xcdr (p))
+      lisp p;
+      for (p = xwin32_menu_items (lmenu); --l > 0; p = xcdr (p))
         assert (consp (p));
       assert (consp (p));
       xcdr (tem) = xcdr (p);
@@ -779,7 +780,8 @@ Fcopy_menu_items (lisp old_menu, lisp new_menu)
   if (old_menu == new_menu)
     return new_menu;
 
-  for (int i = GetMenuItemCount (xwin32_menu_handle (new_menu)) - 1; i >= 0; i--)
+  int i;
+  for (i = GetMenuItemCount (xwin32_menu_handle (new_menu)) - 1; i >= 0; i--)
     RemoveMenu (xwin32_menu_handle (new_menu), i, MF_BYPOSITION);
   xwin32_menu_items (new_menu) = Fcopy_list (xwin32_menu_items (old_menu));
 

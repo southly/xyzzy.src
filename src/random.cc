@@ -72,7 +72,8 @@ make_random_state (lisp keys)
   if (!general_vector_p (v) || xvector_length (v) != Random::INDEX_MAX + 1)
     FEprogram_error (Einvalid_random_state_initializer, v);
   lisp *x = xvector_contents (v);
-  for (int i = 0; i < Random::INDEX_MAX + 1; i++, x++)
+  int i;
+  for (i = 0; i < Random::INDEX_MAX + 1; i++, x++)
     if (!fixnump (*x))
       FEprogram_error (Einvalid_random_state_initializer, v);
   x = xvector_contents (v);

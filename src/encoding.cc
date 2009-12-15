@@ -871,7 +871,8 @@ int
 utf7_to_internal_stream::unicode_shifted_encoding ()
 {
   u_char buf[8];
-  for (int nchars = 0; nchars < sizeof buf; nchars++)
+  int nchars;
+  for (nchars = 0; nchars < sizeof buf; nchars++)
     {
       s_cc = s_in.get ();
       if (s_cc == eof)
@@ -884,7 +885,8 @@ utf7_to_internal_stream::unicode_shifted_encoding ()
 
   int t = 0;
   int n = nchars & ~3;
-  for (int i = 0; i < n; i += 4)
+  int i;
+  for (i = 0; i < n; i += 4)
     {
       buf[t++] = (buf[i] << 2) | (buf[i + 1] >> 4);
       buf[t++] = (buf[i + 1] << 4) | (buf[i + 2] >> 2);
@@ -1233,7 +1235,8 @@ internal_to_iso2022_stream::select_designation (int ccs) const
 {
   if (ccs == ccs_usascii)
     return 0;
-  for (int i = 0; i < 4; i++)
+  int i;
+  for (i = 0; i < 4; i++)
     if (s_initial[i] == ccs)
       return i;
   for (i = 0; i < 4; i++)
@@ -1764,7 +1767,8 @@ void
 internal_to_utf7_stream::encode_b64 ()
 {
   int n = s_nb - s_nb % 3;
-  for (const u_char *b = s_b, *const be = s_b + n; b < be; b += 3)
+  const u_char *b = s_b, *const be = s_b + n;
+  for (; b < be; b += 3)
     {
       put (s_b64[(b[0] >> 2) & 63]);
       put (s_b64[((b[0] << 4) | (b[1] >> 4)) & 63]);
@@ -2009,7 +2013,8 @@ int
 xdecode_b64_stream::refill ()
 {
   u_char buf[XDECODE_STREAM_BUFSIZE / 3 * 4];
-  for (int nchars = 0; nchars < sizeof buf;)
+  int nchars;
+  for (nchars = 0; nchars < sizeof buf;)
     {
       int c = s_in.get ();
       if (c == eof)
@@ -2037,7 +2042,8 @@ xdecode_uu_stream::refill ()
 
   int nchars = uudecode (c);
   u_char buf[63 / 3 * 4];
-  for (int i = 0; i < sizeof buf; i++)
+  int i;
+  for (i = 0; i < sizeof buf; i++)
     {
       c = s_in.get ();
       if (c == eof || c == '\n')
@@ -2155,7 +2161,8 @@ xencode_uu_stream::refill ()
     return eof;
 
   u_char buf[BUFSIZE];
-  for (int nchars = 0; nchars < sizeof buf; nchars++)
+  int nchars;
+  for (nchars = 0; nchars < sizeof buf; nchars++)
     {
       int c = s_in.get ();
       if (c == eof)
@@ -2320,7 +2327,8 @@ int
 xdecode_hqx_stream::hqx7::refill ()
 {
   u_char buf[XDECODE_STREAM_BUFSIZE / 3 * 4];
-  for (int nchars = 0; nchars < sizeof buf;)
+  int nchars;
+  for (nchars = 0; nchars < sizeof buf;)
     {
       int c = s_in.get ();
       if (c == eof)
@@ -2404,7 +2412,8 @@ xdecode_hqx_stream::xdecode_hqx_stream (xinput_stream <u_char> &in)
       corrupted ();
       return;
     }
-  for (int i = 0; i < l; i++)
+  int i;
+  for (i = 0; i < l; i++)
     {
       int c = get ();
       if (c == eof)

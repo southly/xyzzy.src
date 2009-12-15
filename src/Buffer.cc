@@ -420,7 +420,8 @@ Buffer::link_list ()
   else
     {
       long ver = 1;
-      for (Buffer *bp = b_blist;; bp = bp->b_next)
+      Buffer *bp;
+      for (bp = b_blist;; bp = bp->b_next)
         {
           int f = bcmp (xstring_contents (lbuffer_name),
                         xstring_contents (bp->lbuffer_name),
@@ -480,7 +481,8 @@ create_default_buffers ()
 Buffer *
 Buffer::find_buffer (const Char *name, int l, long version)
 {
-  for (Buffer *bp = b_blist; bp; bp = bp->b_next)
+  Buffer *bp;
+  for (bp = b_blist; bp; bp = bp->b_next)
     if (xstring_length (bp->lbuffer_name) == l
         && !bcmp (xstring_contents (bp->lbuffer_name), name, l)
         && (version == -1 || version == bp->b_version))
@@ -822,7 +824,8 @@ Buffer::dlist_force_add_tail ()
         b_dlist = this;
       else
         {
-          for (Buffer *d = b_dlist; d->b_ldisp; d = d->b_ldisp)
+          Buffer *d;
+          for (d = b_dlist; d->b_ldisp; d = d->b_ldisp)
             ;
           d->b_ldisp = this;
         }
@@ -857,7 +860,8 @@ in_pseudo_frame_p (Buffer *bp)
 Buffer *
 Buffer::dlist_find ()
 {
-  for (Buffer *bp = b_dlist; bp; bp = bp->b_ldisp)
+  Buffer *bp;
+  for (bp = b_dlist; bp; bp = bp->b_ldisp)
     if (Fget_buffer_window (bp->lbp, Qnil) == Qnil
         && !in_pseudo_frame_p (bp))
       return bp;
@@ -1340,7 +1344,8 @@ Buffer::change_colors (const XCOLORREF *cc)
     {
       if (b_colors_enable)
         {
-          for (int i = 0; i < USER_DEFINABLE_COLORS; i++)
+          int i;
+          for (i = 0; i < USER_DEFINABLE_COLORS; i++)
             if (b_colors[i] != cc[i])
               break;
           if (i == USER_DEFINABLE_COLORS)

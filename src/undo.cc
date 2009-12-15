@@ -301,7 +301,8 @@ Buffer::save_modify_undo (const Point &point, int size)
 void
 Buffer::save_modtime_undo (const FileTime &modtime)
 {
-  for (UndoInfo *u = b_undo; u; u = u->prev ())
+  UndoInfo *u;
+  for (u = b_undo; u; u = u->prev ())
     u->modify ();
   for (u = b_redo; u; u = u->prev ())
     u->modify ();

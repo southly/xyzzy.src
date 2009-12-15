@@ -403,7 +403,8 @@ main ()
   printf ("\n");
 
   printf ("static const Char ibmext2internal_table[] =\n{");
-  for (int i = 0; i < numberof (sjis2eucjp); i++)
+  int i;
+  for (i = 0; i < numberof (sjis2eucjp); i++)
     {
       if (!(i % 8))
         printf ("\n ");
