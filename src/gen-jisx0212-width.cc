@@ -40,7 +40,7 @@ main ()
       ucs2_t wc = internal2wc_table[i];
       if (wc != ucs2_t (-1))
         {
-          GetTextExtentPoint32W (hdc, &wc, 1, &sz);
+          GetTextExtentPoint32W (hdc, (LPCWSTR)&wc, 1, &sz);
           if (sz.cx != sz0.cx)
             width[(i - CCS_JISX0212_MIN) >> 3] &= ~(1 << (i & 7));
         }

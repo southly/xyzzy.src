@@ -25,7 +25,7 @@ obj2bstr (lisp obj)
   BSTR bstr = SysAllocStringLen (0, l - 1);
   if (!bstr)
     FEstorage_error ();
-  i2w (obj, bstr);
+  i2w (obj, (ucs2_t *)bstr);
   return bstr;
 }
 

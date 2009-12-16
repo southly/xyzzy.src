@@ -20,7 +20,7 @@ _w2a_helper (char *a, const wchar_t *w, int l)
 static inline wchar_t *
 _i2w_helper (wchar_t *w, const Char *p, int l)
 {
-  i2w (p, l, w);
+  i2w (p, l, (ucs2_t *)w);
   return w;
 }
 

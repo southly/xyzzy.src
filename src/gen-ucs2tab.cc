@@ -438,7 +438,7 @@ make_wc2cp950 (ucs2_t *const wc2cp950)
       ucs2_t wc = i;
       char mb[3];
       BOOL f;
-      int n = WideCharToMultiByte (CP_CN_TRADITIONAL, 0, &wc, 1, mb, 3, 0, &f);
+      int n = WideCharToMultiByte (CP_CN_TRADITIONAL, 0, (LPCWSTR)&wc, 1, mb, 3, 0, &f);
       if (f)
         wc2cp950[i] = ucs2_t (-1);
       else
@@ -527,7 +527,7 @@ make_wc2cp949 (ucs2_t *const wc2cp949)
       ucs2_t wc = i;
       char mb[3];
       BOOL f;
-      int n = WideCharToMultiByte (CP_KOREAN, 0, &wc, 1, mb, 3, 0, &f);
+      int n = WideCharToMultiByte (CP_KOREAN, 0, (LPCWSTR)&wc, 1, mb, 3, 0, &f);
       if (f)
         wc2cp949[i] = ucs2_t (-1);
       else
@@ -579,7 +579,7 @@ make_wc2cp936 (ucs2_t *const wc2cp936)
       ucs2_t wc = i;
       char mb[3];
       BOOL f;
-      int n = WideCharToMultiByte (CP_CN_SIMPLIFIED, 0, &wc, 1, mb, 3, 0, &f);
+      int n = WideCharToMultiByte (CP_CN_SIMPLIFIED, 0, (LPCWSTR)&wc, 1, mb, 3, 0, &f);
       if (f)
         wc2cp936[i] = ucs2_t (-1);
       else
@@ -829,7 +829,7 @@ make_wc2cp932 (ucs2_t *const wc2cp932)
       ucs2_t wc = i;
       char mb[3];
       BOOL f;
-      int n = WideCharToMultiByte (CP_JAPANESE, 0, &wc, 1, mb, 3, 0, &f);
+      int n = WideCharToMultiByte (CP_JAPANESE, 0, (LPCWSTR)&wc, 1, mb, 3, 0, &f);
       if (f)
         wc2cp932[i] = ucs2_t (-1);
       else
@@ -867,7 +867,7 @@ make_cp932 (ucs2_t *wbuf)
     {
       mb[0] = i;
       wc = 0;
-      n = MultiByteToWideChar (CP_JAPANESE, 0/*MB_ERR_INVALID_CHARS*/, mb, 1, &wc, 1);
+      n = MultiByteToWideChar (CP_JAPANESE, 0/*MB_ERR_INVALID_CHARS*/, mb, 1, (LPWSTR)&wc, 1);
       if (n == 1 && (!i || wc))
         wbuf[i] = wc;
     }
@@ -876,7 +876,7 @@ make_cp932 (ucs2_t *wbuf)
     {
       mb[0] = i >> 8;
       mb[1] = i;
-      n = MultiByteToWideChar (CP_JAPANESE, MB_ERR_INVALID_CHARS, mb, 2, &wc, 1);
+      n = MultiByteToWideChar (CP_JAPANESE, MB_ERR_INVALID_CHARS, mb, 2, (LPWSTR)&wc, 1);
       if (n == 1)
         wbuf[i] = wc;
     }
@@ -885,7 +885,7 @@ make_cp932 (ucs2_t *wbuf)
     {
       mb[0] = i >> 8;
       mb[1] = i;
-      n = MultiByteToWideChar (CP_JAPANESE, MB_ERR_INVALID_CHARS, mb, 2, &wc, 1);
+      n = MultiByteToWideChar (CP_JAPANESE, MB_ERR_INVALID_CHARS, mb, 2, (LPWSTR)&wc, 1);
       if (n == 1)
         wbuf[i] = wc;
     }
