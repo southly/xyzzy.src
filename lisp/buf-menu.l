@@ -45,7 +45,7 @@
 (defun buffer-menu ()
   (interactive)
   (list-buffers)
-  (goto-line 3))
+  (scan-buffer "^\\." :regexp t))
 
 (defun buffer-menu-buffer-exist-p ()
   (goto-column 1)

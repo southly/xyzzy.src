@@ -1,5 +1,8 @@
 2009-12-17  NANRI Masaoki  <southly@gmail.com>
 
+	* lisp : modify start point in buffer-menu.
+	buffer-menuを実行したときのカーソル位置を現在のバッファの位置に変更。
+
 	* src : add key parameter ":show" to make-process.
 	make-processにキーパラメータ :show を追加する。
 	http://xyzzy.s53.xrea.com/wiki/index.php?patch%2F12
