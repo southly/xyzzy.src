@@ -1,5 +1,8 @@
 2009-12-17  NANRI Masaoki  <southly@gmail.com>
 
+	* lisp : modify edict-lookup-word.
+	辞書を引く単語をカーソルの前方に変更。
+
 	* lisp : modify start point in buffer-menu.
 	buffer-menuを実行したときのカーソル位置を現在のバッファの位置に変更。
 

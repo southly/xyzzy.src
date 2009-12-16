@@ -46,10 +46,10 @@
 (defun edict-lookup-word (fn)
   (apply fn (save-excursion
 	      (list (progn
-		      (forward-word 1)
+		      (forward-word -1)
 		      (point))
 		    (progn
-		      (forward-word -1)
+		      (forward-word 1)
 		      (point))))))
 
 (defun lookup-e2j-dictionary-word ()
