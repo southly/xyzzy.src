@@ -1,5 +1,8 @@
 2009-12-17  NANRI Masaoki  <southly@gmail.com>
 
+	* lisp : modify tags-setup-buffer.
+	XTAGSファイルを探す位置を少々変更。
+
 	* lisp : modify edict-lookup-word.
 	辞書を引く単語をカーソルの前方に変更。
 
