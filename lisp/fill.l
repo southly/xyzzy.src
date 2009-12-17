@@ -42,8 +42,9 @@
 		 (and (or (kanji-char-p c)
 			  (kana-char-p c))
 		      (not (listen *keyboard*))))
-	     (>= (current-column) fill-column))
+	     (>= (1+ (save-excursion (forward-char -1) (current-column))) fill-column))
     (when (= (save-excursion
+	       (forward-char -1)
 	       (kinsoku-goto-column fill-column *fill-kinsoku-mode*)
 	       (when (eolp)
 		 (return-from do-auto-fill nil))
@@ -55,6 +56,7 @@
       (forward-char 1))
     (when mode-specific-indent-command
       (save-excursion
+	(forward-char -1)
 	(goto-bol)
 	(funcall mode-specific-indent-command))
       (when (bolp)

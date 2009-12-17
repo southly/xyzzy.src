@@ -1,5 +1,8 @@
 2009-12-17  NANRI Masaoki  <southly@gmail.com>
 
+	* lisp : modify do-auto-fill.
+	なぜ変更したのか覚えていない。記録だけしておく。
+
 	* lisp : modify make-tags-file-dialog.
 	タグファイル作成ダイアログのソースディレクトリのデフォルトにXTAGSフ
 	ァイルの内容を反映するように修正。
