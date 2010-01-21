@@ -279,7 +279,7 @@ Buffer::read_file_contents (ReadFileContext &rfc, const char *filename,
     {
       if (char_encoding_p (rfc.r_expect_char_encoding)
           && xchar_encoding_type (rfc.r_expect_char_encoding) == encoding_auto_detect)
-        rfc.r_expect_char_encoding = detect_encoding (mf, 0x10000);
+        rfc.r_expect_char_encoding = detect_encoding (mf, 0x10000 * 2);
 
       if (!char_encoding_p (rfc.r_expect_char_encoding))
         {
@@ -352,7 +352,7 @@ Buffer::readin_chunk (ReadFileContext &rfc, const char *filename)
 
   try
     {
-      rfc.r_expect_char_encoding = detect_encoding (mf, 0x8000);
+      rfc.r_expect_char_encoding = detect_encoding (mf, 0x8000 * 2);
       if (!char_encoding_p (rfc.r_expect_char_encoding)
           || xchar_encoding_type (rfc.r_expect_char_encoding) == encoding_auto_detect)
         rfc.r_expect_char_encoding = xsymbol_value (Qencoding_sjis);

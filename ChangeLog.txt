@@ -1,5 +1,8 @@
 2010-01-22  NANRI Masaoki  <southly@gmail.com>
 
+	* src : modify buffer size in detecting char-encoding.
+	文字エンコーディングの判定時のバッファサイズを2倍に変更。
+
 	* src : fix listen.
 	EOFのときにnilを返すように修正。
 	分かる範囲ということでstring-streamとfile-streamだけ。
