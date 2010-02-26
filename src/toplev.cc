@@ -1013,6 +1013,11 @@ toplevel_wndproc (HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
       return 0;
 
     case WM_SYSCOMMAND:
+      if (wparam == SC_MINIMIZE)
+        {
+          ShowWindow(hwnd, SW_SHOWMINIMIZED);
+          return 0;
+        }
       if ((wparam & 0xfff0) != SC_CLOSE)
         break;
       /* fall thru... */
