@@ -1,6 +1,6 @@
 
 # define VC++ version (4, 6, or 7)
-VCVER=8
+VCVER=9
 
 .SUFFIXES: .cc .rc .res .d
 
@@ -174,7 +174,7 @@ FINAL_TARGET=$(OUTDIR)/$(BUILD)
 
 OUTDIR=r
 OBJS=$(OBJS: = r/)
-CXXFLAGS=-Ob1 -Og -Oi -Ot -Oy -G5 -Gs -Gy -Gz $(CXXOPT) -W3 -MT -vmb $(INC) $(DEFS) -Fo$(OUTDIR)/
+CXXFLAGS=-Ob1 -Og -Oi -Ot -Oy -Gs -Gy -Gz $(CXXOPT) -W3 -MT -vmb -arch:SSE2 $(INC) $(DEFS) -Fo$(OUTDIR)/
 LDFLAGS=-stack:0x2000000 -map:$(OUTDIR)/xyzzy.map -incremental:no -fixed -opt:ref
 FINAL_TARGET=../$(BUILD)
 
@@ -531,3 +531,9 @@ profile: prof-dir prof-target
 	prep -nologo -M src/$(PROFDIR)/xyzzy
 	plist -nologo -sc src/$(PROFDIR)/xyzzy
 
+repl: $(OUTDIR)/xyzzyrpl.exe
+$(OUTDIR)/repl.obj: cdecl.h
+$(OUTDIR)/xyzzyrpl.exe: $(OUTDIR)/repl.obj $(OBJS) $(PRIVCTRLOBJS) $(OUTDIR)/xyzzy.res
+	$(LD) @<<
+  $(LDFLAGS) -out:$@ $(OUTDIR)/repl.obj $(OBJS) $(PRIVCTRLOBJS) -subsystem:console $(LIBS) $(OUTDIR)/xyzzy.res
+<<

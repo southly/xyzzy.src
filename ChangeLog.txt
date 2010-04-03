@@ -1,3 +1,18 @@
+2010-04-04  NANRI Masaoki  <southly@gmail.com>
+
+	* src : add repl.
+	コマンドプロンプトを表示するバージョンxyzzyrpl.exeを作成できるようにし
+	た。「nmake repl」で作成できる。
+
+	;;; 簡易REPL
+	(defun repl ()
+	  (interactive)
+	  (let ((*standard-input* *terminal-io*)
+	        (*standard-output* *terminal-io*))
+	    (loop
+	      (format t "~%> ")
+	      (format t "~A" (eval (read *standard-input*))))))
+
 2010-03-01  NANRI Masaoki  <southly@gmail.com>
 
 	* src : fix "*load-pathname*" initialization.
