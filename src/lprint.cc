@@ -2842,7 +2842,7 @@ Format::tabulate (wStream &stream)
         {
           if (!colinc)
             return;
-          colnum += (col - colnum + colinc - 1) / colinc * colinc;
+          colnum += (col - colnum + colinc) / colinc * colinc;
         }
       stream.fill (' ', colnum - col);
     }
@@ -3358,6 +3358,12 @@ Format::prefix_parameters ()
                   {
                     param[nparams].type = FMT_CHAR;
                     param[nparams].value = xchar_code (x);
+                    nparams++;
+                  }
+                else if (x == Qnil)
+                  {
+                    param[nparams].type = FMT_NIL;
+                    param[nparams].value = 0;
                     nparams++;
                   }
                 else
