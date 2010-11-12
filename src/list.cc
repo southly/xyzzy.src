@@ -178,10 +178,14 @@ Flist_length (lisp list)
   for (lisp fast = list, slow = list;;
        n += 2, fast = Fcddr (fast), slow = Fcdr (slow))
     {
-      if (Fendp (fast) != Qnil)
+      if (fast == Qnil)
         return make_fixnum (n);
-      if (Fendp (Fcdr (fast)) != Qnil)
+      if (!consp (fast))
+        FEtype_error (fast, Qlist);
+      if (Fcdr (fast) == Qnil)
         return make_fixnum (n + 1);
+      if (!consp (Fcdr (fast)))
+        FEtype_error (Fcdr (fast), Qlist);
       if (n && fast == slow)
         return Qnil;
     }
