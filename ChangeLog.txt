@@ -1,5 +1,13 @@
 2011-01-21  NANRI Masaoki  <southly@gmail.com>
 
+	* lisp : fix pipe-command.
+	「plink name@example.jp ls」と plink を利用しようとすると
+	「Unable to read from standard input: ハンドルが無効です。」
+	というエラーになるのを修正。
+
+	execute-shell-command の第二引数に文字列・nil以外の引数を渡すとファイル
+	名が空のファイルを開こうとするので、エラーになっていた模様。
+
 	* src : fix wheel icon.
 	なんとなくホイールボタンをクリックしたときのアイコンをいじってみた。
 
