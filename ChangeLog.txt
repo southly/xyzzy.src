@@ -1,5 +1,8 @@
 2011-01-21  NANRI Masaoki  <southly@gmail.com>
 
+	* src : fix wheel icon.
+	なんとなくホイールボタンをクリックしたときのアイコンをいじってみた。
+
 	* src : fix multiple binding of special variables in let, let*.
 	http://d.hatena.ne.jp/bowbow99/20101127/1290818576
 	let や let* で同一のスペシャル変数に対して複数回の束縛を作ったときの値
