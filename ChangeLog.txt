@@ -1,5 +1,11 @@
 2011-12-21  NANRI Masaoki  <southly@gmail.com>
 
+	* lisp : fix error jump.
+	関数 find-errors-get-buffer の引数 name にパスとして長すぎる文字列が渡
+	されたときにエラーで処理が止まってしまうのを修正。*error-regexp-list*
+	の中の別の正規表現に誤ってマッチしてしまい、ファイル名部分が長くなって
+	しまった場合を想定している。
+
 	* lisp : fix saving session file.
 	ヒストリファイルと同様にセッションファイルも書き込み時に *print-length*
 	などの影響を受けないよう修正。

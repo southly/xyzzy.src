@@ -34,7 +34,7 @@
 	   t)
 	  ((setq buffer (if (string-match "^<.+>$" name)
 			    (find-buffer (subseq name 1 (- (length name) 1)))
-			  (and (file-exist-p file)
+			  (and (ignore-errors (file-exist-p file))
 			       (or (get-file-buffer file)
 				   (save-excursion
 				     (find-file file nil t)
