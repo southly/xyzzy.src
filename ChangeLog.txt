@@ -1,3 +1,14 @@
+2011-12-23  NANRI Masaoki  <southly@gmail.com>
+
+	* src : bypass assertion in regexp search.
+	関数 substitute-string や関数 string-looking-at で長い文字列(32768以上)
+	を検索の対象にした時、アサーションに誤って引っかかるのを回避する。
+
+	Regexp::search (const Char *string, int size, int offset)
+	Regexp::match (const Char *string, int size, int offset)
+	にて short の Chunk::c_used に int の size を代入してしまっていたのが原
+	因。
+
 2011-12-21  NANRI Masaoki  <southly@gmail.com>
 
 	* lisp : fix error jump.

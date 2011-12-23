@@ -2482,7 +2482,7 @@ int
 Regexp::search (const Char *string, int size, int offset)
 {
   Chunk chunk;
-  chunk.c_used = size;
+  chunk.c_used = Chunk::DUMMY;
   chunk.c_text = (Char *)string;
   chunk.c_prev = 0;
   chunk.c_next = 0;
@@ -2593,7 +2593,7 @@ int
 Regexp::match (const Char *string, int size, int offset)
 {
   Chunk chunk;
-  chunk.c_used = size;
+  chunk.c_used = Chunk::DUMMY;
   chunk.c_text = (Char *)string;
   chunk.c_prev = 0;
   chunk.c_next = 0;
