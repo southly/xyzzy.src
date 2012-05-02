@@ -1379,6 +1379,7 @@ static symbols kwd[] =
   DEFKWD2 (osfjvc),
   DEFKWD2 (vender),
   DEFKWD2 (invalidate),
+  DEFKWD2 (filer),
 };
 
 static symbols unint[] =

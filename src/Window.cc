@@ -2,6 +2,7 @@
 #include "conf.h"
 #include "ipc.h"
 #include "wheel.h"
+#include "filer.h"
 
 #define RULER_HEIGHT 13
 #define FRAME_WIDTH 2
@@ -1925,6 +1926,8 @@ Fget_window_handle (lisp window)
 {
   if (!window || window == Qnil)
     return make_fixnum (long (app.toplev));
+  if (window == Kfiler)
+    return make_fixnum (long (Filer::current_filer ()->id_hwnd));
   return make_fixnum (long (Window::coerce_to_window (window)->w_hwnd));
 }
 
