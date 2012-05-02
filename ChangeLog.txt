@@ -1,3 +1,9 @@
+2012-05-02  NANRI Masaoki  <southly@gmail.com>
+
+	* src : support getting filer's window handle
+	(get-window-handle :filer)
+	でファイラのウィンドウハンドルを取得できるようにした。
+
 2011-12-23  NANRI Masaoki  <southly@gmail.com>
 
 	* src : bypass assertion in regexp search.
