@@ -460,9 +460,6 @@
 	タグファイル作成ダイアログのソースディレクトリのデフォルトにXTAGSフ
 	ァイルの内容を反映するように修正。
 
-	* lisp : modify tags-setup-buffer.
-	XTAGSファイルを探す位置を少々変更。
-
 	* lisp : modify edict-lookup-word.
 	辞書を引く単語をカーソルの前方に変更。
 

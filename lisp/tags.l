@@ -71,7 +71,7 @@
     (save-excursion
       (set-buffer buffer)
       (goto-char (point-min))
-      (when (looking-at "#USE \\(\\(../\\)+[^/]*\\)$")
+      (when (looking-at "#USE \\(\\(../\\)+\\)$")
 	(let ((d (namestring (match-string 1))))
 	  (setq buffer (or (find-tags-buffer d)
 			   (create-tags-buffer d)))
